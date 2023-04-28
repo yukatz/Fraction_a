@@ -19,7 +19,6 @@ TEST_CASE("Arithmetics functions test")
     CHECK_NOTHROW(a + b);
     CHECK_NOTHROW(a - b);
     CHECK_NOTHROW(a * b);
-    CHECK_NOTHROW(a / b);
     b.setNum(0), b.setDenom(0);
     CHECK_THROWS(a / b);
     CHECK_NOTHROW(a + 2);
@@ -27,10 +26,29 @@ TEST_CASE("Arithmetics functions test")
     CHECK_NOTHROW(a * 2);
     CHECK_NOTHROW(a / 2);
     CHECK_THROWS(a / 0);
-    //CHECK_NOTHROW(2 + a);
-    //CHECK_NOTHROW(2 - a);
-    //CHECK_NOTHROW(2 * a);
-    //CHECK_NOTHROW(2 / a);
+    CHECK_NOTHROW((2 + a));
+    CHECK_NOTHROW((2 - a));
+    CHECK_NOTHROW((2 * a));
+    a.setNum(0),a.setDenom(0);
+    CHECK_THROWS((2 / a));
+    a.setNum(3),a.setDenom(4);
+    b.setNum(2), b.setDenom(3);
+    //Fraction VS Fraction
+    CHECK_EQ((a+b), Fraction(17,12));
+    CHECK_EQ((a-b), Fraction(1,12));
+    CHECK_EQ((a*b), Fraction(6,12));
+    CHECK_EQ((a*b), Fraction(1,2));
+    CHECK_EQ((a/b), Fraction(9,8));
+    //Fraction VS Number
+    CHECK_EQ((a+2), Fraction(11,4));
+    CHECK_EQ((a-2), Fraction(-5,4));
+    CHECK_EQ((a*2), Fraction(6,4));
+    CHECK_EQ((a/2), Fraction(3,8));
+    //Number VS Fraction
+    CHECK_EQ((2+a), Fraction(11,4));
+    CHECK_EQ((2-a), Fraction(5,4));
+    CHECK_EQ((2*a), Fraction(6,12));
+    CHECK_EQ((2/a), Fraction(8,3));
 }
 
 TEST_CASE("Compare operators")
@@ -41,21 +59,34 @@ TEST_CASE("Compare operators")
     CHECK((a < b) == false);
     CHECK((a >= b) == true);
     CHECK((a <= b) == false);
-    CHECK_NOTHROW(a == b);
-    CHECK_NOTHROW(a > b);
-    CHECK_NOTHROW(a < b);
-    CHECK_NOTHROW(a >= b);
-    CHECK_NOTHROW(a <= b);
+    a.setNum(2);
+    CHECK((a == b) == false);
+    CHECK((a > b) == false);
+    CHECK((a < b) == true);
+    CHECK((a >= b) == false);
+    CHECK((a <= b) == true);
+    b.setDenom(4);
+    CHECK((a == b) == true);
+    a.setNum(8);
+    CHECK((b.getNum() == a) == true);
+    CHECK((b < a.getNum())==true);
+    Fraction c(4,8), d(100,200);
+    CHECK((c == d)==true);
 }
 
-TEST_CASE("Ptint functions test")
+TEST_CASE("Countup and countdownd operators")
 {
-    Fraction a(3, 4), b(2, 3);
-    ostringstream output;
-    streambuf *old_cout = cout.rdbuf(output.rdbuf());
+    Fraction a(2,1);
+    CHECK_EQ((a++),Fraction(3,1));
+    CHECK_EQ((a--),Fraction(1,1));
+    CHECK_EQ((++a),Fraction(3,1));
+    CHECK_EQ((--a),Fraction(1,1));
 
-    cout << "a: " << a << "b: " << b << endl;
+    CHECK_NOTHROW((a++));
+    CHECK_NOTHROW((a--));
+    CHECK_NOTHROW((++a));
+    CHECK_NOTHROW((--a));
 
-    cout.rdbuf(old_cout);
-    CHECK(output.str() == "");
 }
+
+
