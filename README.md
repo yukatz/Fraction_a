@@ -16,6 +16,6 @@ Class named Fraction that represents a fraction of two integers. Overload the fo
 ## Countup and countdownd operator
 * The operators ++ & --  adds (or substracts) 1 to the fraction. implement both pre and post fix.
 
-## C>>out and S<<in operators
+## C>>out and C<<in operators
 * The  operator <<  prints a fraction to an output stream in the format “numerator/denominator”.
 * The  operator >> to read a fraction from an input stream by taking two integers as input. 
