@@ -16,6 +16,9 @@ namespace ariel
         // Constructors
         Fraction();
         Fraction(int a, int b);
+        Fraction(double Fraction);
+
+        void fractReduct();
 
         // Getters&Setters
         int getNum();
