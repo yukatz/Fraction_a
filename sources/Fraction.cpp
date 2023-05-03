@@ -39,13 +39,6 @@ namespace ariel
         denominator = n;
     }
 
-    string Fraction::fractToString()
-    {
-        std::stringstream result;
-        result << this->numerator << "/" << this->denominator;
-        return result.str();
-    }
-
     Fraction Fraction::operator+(const Fraction &other) const
     {
         int commonDenominator = lcm(denominator, other.denominator);

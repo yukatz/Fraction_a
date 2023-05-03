@@ -26,8 +26,6 @@ namespace ariel
         void setNum(int n);
         void setDenom(int n);
 
-        // toString
-        string fractToString();
 
         // Overloading operators +,-,*,/
         // Fraction VS Fraction
